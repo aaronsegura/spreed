@@ -99,3 +99,4 @@ title: Capabilities
 * `sip-support-nopin` - Whether SIP can be configured to not require a custom attendee PIN
 * `send-call-notification` - When the API allows to resend call notifications for individual users that did not join yet
 * `config => call => enabled` - Whether calling is enabled on the instance or not
+* `time-to-live` - Time to live of messages for a conversation
