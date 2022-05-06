@@ -105,6 +105,7 @@ class Capabilities implements IPublicCapability {
 				'chat-permission',
 				'silent-send',
 				'send-call-notification',
+				'time-to-live',
 			],
 			'config' => [
 				'attachments' => [

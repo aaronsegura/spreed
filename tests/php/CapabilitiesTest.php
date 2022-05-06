@@ -109,6 +109,7 @@ class CapabilitiesTest extends TestCase {
 			'chat-permission',
 			'silent-send',
 			'send-call-notification',
+			'time-to-live',
 			'reactions',
 		];
 	}
