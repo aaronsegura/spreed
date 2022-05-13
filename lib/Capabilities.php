@@ -105,7 +105,6 @@ class Capabilities implements IPublicCapability {
 				'chat-permission',
 				'silent-send',
 				'send-call-notification',
-				'time-to-live',
 			],
 			'config' => [
 				'attachments' => [
@@ -124,6 +123,10 @@ class Capabilities implements IPublicCapability {
 				],
 			],
 		];
+
+		if ($this->serverConfig->getAppValue('core', 'backgroundjobs_mode', '') === 'cron') {
+			$capabilities['features'][] = 'time-to-live';
+		}
 
 		if ($this->commentsManager->supportReactions()) {
 			$capabilities['features'][] = 'reactions';
