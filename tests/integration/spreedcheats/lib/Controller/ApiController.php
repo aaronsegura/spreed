@@ -26,9 +26,9 @@ declare(strict_types=1);
 namespace OCA\SpreedCheats\Controller;
 
 use OCA\Talk\BackgroundJob\ApplyMessageExpire;
+use OCP\AppFramework\Http;
 use OCP\AppFramework\OCSController;
 use OCP\AppFramework\Http\DataResponse;
-use OCP\AppFramework\Http\JSONResponse;
 use OCP\IDBConnection;
 use OCP\IRequest;
 use OCP\Share\IShare;
@@ -102,12 +102,12 @@ class ApiController extends OCSController {
 	/**
 	 * @NoCSRFRequired
 	 *
-	 * @return JSONResponse
+	 * @return DataResponse
 	 */
-	public function getMessageExpireJob($token): JSONResponse {
+	public function getMessageExpireJob($token): DataResponse {
 		$roomId = $this->getRoomIdByToken($token);
 		if (!$roomId) {
-			return new JSONResponse();
+			return new DataResponse([], Http::STATUS_NOT_FOUND);
 		}
 		$query = $this->db->getQueryBuilder();
 		$query->select('id')
@@ -121,9 +121,9 @@ class ApiController extends OCSController {
 		$result = $query->executeQuery();
 		$job = $result->fetchOne();
 		if ($job) {
-			return new JSONResponse(['id' => (int) $job]);
+			return new DataResponse(['id' => (int) $job]);
 		}
-		return new JSONResponse();
+		return new DataResponse([], Http::STATUS_NOT_FOUND);
 	}
 
 	private function getRoomIdByToken(string $token): ?string {
