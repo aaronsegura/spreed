@@ -27,6 +27,7 @@ namespace OCA\Talk\Tests\php\Chat;
 use OCA\Talk\Chat\ChatManager;
 use OCA\Talk\Chat\CommentsManager;
 use OCA\Talk\Chat\Notifier;
+use OCA\Talk\Manager;
 use OCA\Talk\Model\Attendee;
 use OCA\Talk\Model\AttendeeMapper;
 use OCA\Talk\Participant;
@@ -60,6 +61,8 @@ class ChatManagerTest extends TestCase {
 	protected $notificationManager;
 	/** @var IManager|MockObject */
 	protected $shareManager;
+	/** @var Manager|MockObject */
+	protected $manager;
 	/** @var RoomShareProvider|MockObject */
 	protected $shareProvider;
 	/** @var ParticipantService|MockObject */
@@ -79,6 +82,7 @@ class ChatManagerTest extends TestCase {
 		$this->dispatcher = $this->createMock(IEventDispatcher::class);
 		$this->notificationManager = $this->createMock(INotificationManager::class);
 		$this->shareManager = $this->createMock(IManager::class);
+		$this->manager = $this->createMock(Manager::class);
 		$this->shareProvider = $this->createMock(RoomShareProvider::class);
 		$this->participantService = $this->createMock(ParticipantService::class);
 		$this->notifier = $this->createMock(Notifier::class);
@@ -92,6 +96,7 @@ class ChatManagerTest extends TestCase {
 			\OC::$server->getDatabaseConnection(),
 			$this->notificationManager,
 			$this->shareManager,
+			$this->manager,
 			$this->shareProvider,
 			$this->participantService,
 			$this->notifier,
@@ -116,6 +121,7 @@ class ChatManagerTest extends TestCase {
 					\OC::$server->getDatabaseConnection(),
 					$this->notificationManager,
 					$this->shareManager,
+					$this->manager,
 					$this->shareProvider,
 					$this->participantService,
 					$this->notifier,
@@ -133,6 +139,7 @@ class ChatManagerTest extends TestCase {
 			\OC::$server->getDatabaseConnection(),
 			$this->notificationManager,
 			$this->shareManager,
+			$this->manager,
 			$this->shareProvider,
 			$this->participantService,
 			$this->notifier,
