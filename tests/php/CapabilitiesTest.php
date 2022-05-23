@@ -135,7 +135,7 @@ class CapabilitiesTest extends TestCase {
 				['spreed', 'has_reference_id', 'no', 'no'],
 				['spreed', 'max-gif-size', '3145728', '200000'],
 				['spreed', 'start_calls', Room::START_CALL_EVERYONE, Room::START_CALL_EVERYONE],
-				['core', 'backgroundjobs_mode', '', 'cron'],
+				['core', 'backgroundjobs_mode', 'ajax', 'cron'],
 			]);
 
 		$this->assertInstanceOf(IPublicCapability::class, $capabilities);
@@ -219,7 +219,7 @@ class CapabilitiesTest extends TestCase {
 				['spreed', 'has_reference_id', 'no', 'yes'],
 				['spreed', 'max-gif-size', '3145728', '200000'],
 				['spreed', 'start_calls', Room::START_CALL_EVERYONE, Room::START_CALL_NOONE],
-				['core', 'backgroundjobs_mode', '', 'cron'],
+				['core', 'backgroundjobs_mode', 'ajax', 'cron'],
 			]);
 
 		$this->assertInstanceOf(IPublicCapability::class, $capabilities);
