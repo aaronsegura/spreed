@@ -704,7 +704,6 @@ class ChatManager {
 
 		$ids = $this->commentsManager->getMessageIdsByRoomIdInDateInterval($roomId, $min, $max);
 		if (!empty($ids)) {
-			$this->reportDeletedMessagesIds($room, $ids);
 			$this->deleteMessagesByIds($ids);
 		}
 		return $ids;
@@ -739,21 +738,5 @@ class ChatManager {
 				)
 			);
 		$delete->executeStatement();
-	}
-
-	private function reportDeletedMessagesIds(Room $chat, array $ids): void {
-		foreach ($ids as $id) {
-			$this->addSystemMessage(
-				$chat,
-				'message_expire_expired',
-				'message_expire_expired',
-				json_encode(['message' => 'message_deleted', 'parameters' => ['message' => $id]]),
-				$this->timeFactory->getDateTime(),
-				false,
-				null,
-				$id,
-				true
-			);
-		}
 	}
 }
