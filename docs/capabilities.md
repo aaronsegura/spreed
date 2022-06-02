@@ -96,7 +96,7 @@ title: Capabilities
 ## 15
 * `chat-permission` - When permission 128 is required to post chat messages, reaction or share items to the conversation
 * `silent-send` - Whether the chat API allows to send chat messages without triggering notifications
+* `message-expire` - Message expiration time for a conversation
 * `sip-support-nopin` - Whether SIP can be configured to not require a custom attendee PIN
 * `send-call-notification` - When the API allows to resend call notifications for individual users that did not join yet
 * `config => call => enabled` - Whether calling is enabled on the instance or not
-* `time-to-live` - Time to live of messages for a conversation
