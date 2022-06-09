@@ -446,7 +446,7 @@ class RoomService {
 		);
 	}
 
-	public function getMessageExpire($room): int {
+	public function getMessageExpire(Room $room): int {
 		return $room->messageExpire;
 	}
 }
