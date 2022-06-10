@@ -851,6 +851,10 @@ class Room {
 		$this->messageExpire = $seconds;
 	}
 
+	public function getMessageExpire(): int {
+		return $this->messageExpire;
+	}
+
 	/**
 	 * @param int $newType Currently it is only allowed to change between `self::TYPE_GROUP` and `self::TYPE_PUBLIC`
 	 * @return bool True when the change was valid, false otherwise
