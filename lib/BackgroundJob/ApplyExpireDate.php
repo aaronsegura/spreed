@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 /**
- * @copyright Copyright (c) 2022 Vitor Mattos <vitor@php.rio>
+ * @copyright Copyright (c) 2020 Morris Jobke <hey@morrisjobke.de>
+ *
+ * @author Morris Jobke <hey@morrisjobke.de>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -21,20 +23,30 @@ declare(strict_types=1);
  *
  */
 
-namespace OCA\Talk\Events;
+namespace OCA\Talk\BackgroundJob;
 
-use OCA\Talk\Room;
+use OCA\Talk\Chat\ChatManager;
+use OCP\AppFramework\Utility\ITimeFactory;
+use OCP\BackgroundJob\IJob;
+use OCP\BackgroundJob\TimedJob;
 
-class ChangeMessageExpireEvent extends RoomEvent {
-	private int $seconds;
-	public function __construct(Room $room,
-								int $seconds
-	) {
-		parent::__construct($room);
-		$this->seconds = $seconds;
+class ApplyExpireDate extends TimedJob {
+	private ChatManager $chatManager;
+
+	public function __construct(ITimeFactory $timeFactory,
+								ChatManager $chatManager) {
+		parent::__construct($timeFactory);
+		$this->chatManager = $chatManager;
+
+		// Every 5 minutes
+		$this->setInterval(5 * 60);
+		$this->setTimeSensitivity(IJob::TIME_SENSITIVE);
 	}
 
-	public function getMessageExpireSeconds(): int {
-		return $this->seconds;
+	/**
+	 * @param array $argument
+	 */
+	protected function run($argument): void {
+		$this->chatManager->deleteExpiredMessages($argument['room_id']);
 	}
 }
